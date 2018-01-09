@@ -6,7 +6,11 @@
     "type": "git",
     "url": "git+https://github.com/Undistraction/js-css-rhythm.git"
   },
-  "files": ["dist", "src", "lib"],
+  "files": [
+    "dist",
+    "src",
+    "lib"
+  ],
   "keywords": [],
   "author": "Pedr Browne",
   "license": "MIT",
@@ -55,6 +59,9 @@
     "rollup-plugin-node-resolve": "^3.0.0"
   },
   "dependencies": {
+    "folktale": "^2.0.1",
+    "folktale-validations": "^0.0.11",
+    "js-css-units": "^0.2.10",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.1.0"
   }
