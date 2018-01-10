@@ -10,6 +10,7 @@ import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
 // eslint-disable-next-line import/prefer-default-export
 export const UNITS = Object.freeze({
   REM: `rem`,
+  EM: `em`,
   PX: `px`,
 });
 
@@ -46,6 +47,3 @@ export const CONFIG = [
     transformer: numberOrPxNumberToNumber,
   },
 ];
-
-// Keys for params object passed into rtm()
-export const VALID_PARAM_KEYS = [`allowHalfLines`, `minLeading`];
