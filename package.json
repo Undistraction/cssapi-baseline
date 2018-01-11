@@ -1,23 +1,19 @@
 {
-  "name": "js-css-rhythm",
+  "name": "cssjs-baseline",
   "version": "0.0.1",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Undistraction/js-css-rhythm.git"
+    "url": "git+https://github.com/Undistraction/cssjs-baseline.git"
   },
-  "files": [
-    "dist",
-    "src",
-    "lib"
-  ],
+  "files": ["dist", "src", "lib"],
   "keywords": [],
   "author": "Pedr Browne",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Undistraction/js-css-rhythm/issues"
+    "url": "https://github.com/Undistraction/cssjs-baseline/issues"
   },
-  "homepage": "https://github.com/Undistraction/js-css-rhythm",
+  "homepage": "https://github.com/Undistraction/cssjs-baseline",
   "scripts": {
     "build": "npm run build:lib && npm run build:dist",
     "prebuild:lib": "rimraf lib/*",

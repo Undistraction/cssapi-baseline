@@ -1,1 +1,1 @@
-# js-css-rhythm
+# cssjs-baseline
