@@ -1,4 +1,9 @@
 import { isFunction } from 'ramda-adjunct';
+import React from 'react';
+import styled from 'styled-components';
+import renderer from 'react-test-renderer';
+import 'jest-styled-components';
+
 import rhythm from '../index';
 
 describe.only(`rhythm`, () => {
