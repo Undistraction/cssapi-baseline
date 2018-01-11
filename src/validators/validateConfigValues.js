@@ -1,17 +1,19 @@
 import { validation as Validation } from 'folktale';
-import { compose, map, find, propEq, toPairs, identity } from 'ramda';
+import { compose, reduce, find, propEq, toPairs } from 'ramda';
 import { CONFIG } from '../const';
 
-const { Failure, collect } = Validation;
+const { Success, Failure } = Validation;
 
-const getValidator = config => {
-  const name = config[0];
+const getValidator = (acc, value) => {
+  const name = value[0];
   const item = find(propEq(`name`, name), CONFIG);
   const { validator } = item;
-  return validator(config[1]).matchWith({
-    Success: identity(),
+  const result = validator(value[1]).matchWith({
+    Success: _ => acc,
     Failure: validation => Failure([`Param '${name}': ${validation.value}`]),
   });
+
+  return acc.concat(result);
 };
 
-export default o => compose(collect, map(getValidator), toPairs)(o);
+export default o => compose(reduce(getValidator, Success(o)), toPairs)(o);
