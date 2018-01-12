@@ -9,6 +9,9 @@ describe(`validateConfigValues()`, () => {
       const value = {
         rootFontSize: 16,
         baselineHeight: 20,
+        minLeading: 4,
+        renderUnit: `px`,
+        allowHalfLines: true,
       };
       const result = validateConfigValues(value);
       expect(Success.hasInstance(result)).toBeTruthy();
@@ -20,6 +23,9 @@ describe(`validateConfigValues()`, () => {
       const value = {
         rootFontSize: `x`,
         baselineHeight: `x`,
+        minLeading: 4,
+        renderUnit: `px`,
+        allowHalfLines: true,
       };
       const result = validateConfigValues(value);
       expect(Failure.hasInstance(result)).toBeTruthy();

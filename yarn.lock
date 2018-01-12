@@ -1806,9 +1806,9 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-folktale-validations@^0.0.23:
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/folktale-validations/-/folktale-validations-0.0.23.tgz#3e6d1e40b1ebfed34b3a0f111e2350ac878656cf"
+folktale-validations@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/folktale-validations/-/folktale-validations-0.0.24.tgz#d8915dddf6c7f1616fde032c4c4425abeab02d20"
   dependencies:
     cssjs-units "^0.2.12"
     folktale "^2.0.1"
