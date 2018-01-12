@@ -1,10 +1,16 @@
-import { reduce } from 'ramda';
+import { reduce, assoc, pluck, always } from 'ramda';
 import { CONFIG } from './const';
 
-const toDefaultConfig = (acc, value) => {
-  acc[value.name] = value.default;
-  return acc;
-};
+export const getDefaultConfig = _ =>
+  reduce(
+    (acc, value) =>
+      value.default ? assoc(value.name, value.default, acc) : acc,
+    {},
+    CONFIG
+  );
 
-// eslint-disable-next-line import/prefer-default-export
-export const getDefaultConfig = _ => reduce(toDefaultConfig, {}, CONFIG);
+export const configKeys = always(pluck(`name`, CONFIG));
+
+export const configValidatorsMap = always(
+  reduce((acc, { name, validator }) => assoc(name, validator, acc), {})(CONFIG)
+);

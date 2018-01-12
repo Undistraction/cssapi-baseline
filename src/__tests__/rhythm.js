@@ -1,7 +1,4 @@
 import { isFunction } from 'ramda-adjunct';
-import React from 'react';
-import styled from 'styled-components';
-import renderer from 'react-test-renderer';
 import 'jest-styled-components';
 
 import rhythm from '../index';
@@ -31,7 +28,7 @@ describe.only(`rhythm`, () => {
       it(`throws`, () => {
         const value = { a: 1, b: 2 };
         expect(() => rhythm.configure(value)).toThrow(
-          `The config object was invalid: Object included invalid keys: '[a, b]'`
+          `The config object was invalid: Object included invalid key(s): '[a, b]`
         );
       });
     });
@@ -40,7 +37,7 @@ describe.only(`rhythm`, () => {
       it(`throws`, () => {
         const value = { rootFontSize: `x`, baselineHeight: `100%` };
         expect(() => rhythm.configure(value)).toThrow(
-          `The config object was invalid: Param 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Param 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`
+          `The config object was invalid: Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`
         );
       });
     });

@@ -24,8 +24,7 @@ describe(`validateConfigValues()`, () => {
       const result = validateConfigValues(value);
       expect(Failure.hasInstance(result)).toBeTruthy();
       expect(result.value).toEqual([
-        `Param 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px'`,
-        `Param 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`,
+        `Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`,
       ]);
     });
   });
