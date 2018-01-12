@@ -1,5 +1,4 @@
 import { isFunction } from 'ramda-adjunct';
-import 'jest-styled-components';
 
 import rhythm from '../index';
 

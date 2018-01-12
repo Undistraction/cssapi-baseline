@@ -7,6 +7,7 @@ import { values, identity } from 'ramda';
 import validateIsNumberOrNumberWithPx from './validators/validateIsNumberOrNumberWithPx';
 import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
 
+// eslint-disable-next-line import/prefer-default-export
 export const UNITS = Object.freeze({
   REM: `rem`,
   EM: `em`,
