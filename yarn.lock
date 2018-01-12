@@ -1199,6 +1199,13 @@ cssbeautify@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cssbeautify/-/cssbeautify-0.3.1.tgz#12dd1f734035c2e6faca67dcbdcef74e42811397"
 
+cssjs-units@^0.2.12:
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/cssjs-units/-/cssjs-units-0.2.12.tgz#2a21d1202f693d28f355064618108259e0eb19a8"
+  dependencies:
+    ramda "^0.25.0"
+    ramda-adjunct "^2.2.0"
+
 cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/cssom/-/cssom-0.3.2.tgz#b8036170c79f07a90ff2f16e22284027a243848b"
@@ -1799,9 +1806,9 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-folktale-validations@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/folktale-validations/-/folktale-validations-0.0.14.tgz#a57eb5cdb178133a58213fe6a92789bcb30bd463"
+folktale-validations@^0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/folktale-validations/-/folktale-validations-0.0.21.tgz#8f9f7a23b265db4a77385929f23aae6419479cc8"
   dependencies:
     folktale "^2.0.1"
     js-css-units "^0.2.10"

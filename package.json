@@ -6,7 +6,11 @@
     "type": "git",
     "url": "git+https://github.com/Undistraction/cssjs-baseline.git"
   },
-  "files": ["dist", "src", "lib"],
+  "files": [
+    "dist",
+    "src",
+    "lib"
+  ],
   "keywords": [],
   "author": "Pedr Browne",
   "license": "MIT",
@@ -67,9 +71,9 @@
     "styled-components": "^2.4.0"
   },
   "dependencies": {
+    "cssjs-units": "^0.2.12",
     "folktale": "^2.0.1",
-    "folktale-validations": "^0.0.14",
-    "js-css-units": "^0.2.10",
+    "folktale-validations": "^0.0.21",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.1.0"
   }

@@ -1,5 +1,5 @@
 import { reduce, compose, toPairs, find, propEq, assoc } from 'ramda';
-import { outputWithUnit } from 'js-css-units';
+import { outputWithUnit } from 'cssjs-units';
 import { CONFIG } from './const';
 import { throwError, invalidAPIParamsMessage } from './errors';
 import { linesForFontsize } from './math';
