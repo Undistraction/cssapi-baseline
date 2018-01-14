@@ -12,6 +12,7 @@ describe(`validateConfigValues()`, () => {
         minLeading: 4,
         renderUnit: `px`,
         allowHalfLines: true,
+        baselineOffset: 0,
       };
       const result = validateConfigValues(value);
       expect(Success.hasInstance(result)).toBeTruthy();
@@ -26,6 +27,7 @@ describe(`validateConfigValues()`, () => {
         minLeading: 4,
         renderUnit: `px`,
         allowHalfLines: true,
+        baselineOffset: 0,
       };
       const result = validateConfigValues(value);
       expect(Failure.hasInstance(result)).toBeTruthy();

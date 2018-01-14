@@ -1,10 +1,23 @@
-import { reduce, compose, toPairs, find, propEq, assoc } from 'ramda';
+import {
+  reduce,
+  compose,
+  toPairs,
+  find,
+  propEq,
+  assoc,
+  gt,
+  curry,
+  partial,
+} from 'ramda';
 import { outputWithUnit } from 'cssjs-units';
 import { CONFIG } from './const';
 import { throwError, invalidAPIParamsMessage } from './errors';
 import { linesForFontsize } from './math';
 import validateAPIArgs from './validators/validateAPIArgs';
 import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
+import { isNotZero } from './utils';
+
+const FONT_SIZE_FOR_OFFSET = 16;
 
 const transformConfig = (newConfig, [name, value]) => {
   const configItem = find(propEq(`name`, name), CONFIG);
@@ -13,9 +26,14 @@ const transformConfig = (newConfig, [name, value]) => {
 };
 
 export default config => {
-  const transformedConfig = compose(reduce(transformConfig, {}), toPairs)(
-    config
-  );
+  const {
+    minLeading,
+    allowHalfLines,
+    baselineHeight,
+    renderUnit,
+    rootFontSize,
+    baselineOffset,
+  } = compose(reduce(transformConfig, {}), toPairs)(config);
 
   return (fontSize, lines) => {
     validateAPIArgs(fontSize, lines).orElse(value => {
@@ -27,24 +45,30 @@ export default config => {
     const outputLines =
       lines ||
       linesForFontsize(
-        transformedConfig.minLeading,
-        transformedConfig.allowHalfLines,
-        transformedConfig.baselineHeight,
+        minLeading,
+        allowHalfLines,
+        baselineHeight,
         unitlessFontSize
       );
 
-    const outputLineHeight = outputLines * transformedConfig.baselineHeight;
-    return {
-      'font-size': outputWithUnit(
-        transformedConfig.renderUnit,
-        transformedConfig.rootFontSize,
-        unitlessFontSize
-      ),
-      'line-height': outputWithUnit(
-        transformedConfig.renderUnit,
-        transformedConfig.rootFontSize,
-        outputLineHeight
-      ),
+    const outputWithChosenUnit = partial(outputWithUnit, [
+      renderUnit,
+      rootFontSize,
+    ]);
+
+    const outputLineHeight = outputLines * baselineHeight;
+
+    const result = {
+      'font-size': outputWithChosenUnit(unitlessFontSize),
+      'line-height': outputWithChosenUnit(outputLineHeight),
     };
+
+    if (isNotZero(baselineOffset)) {
+      const offsetAtFontSize = fontSize / FONT_SIZE_FOR_OFFSET * baselineOffset;
+      result.position = `relative`;
+      result.top = outputWithChosenUnit(offsetAtFontSize);
+    }
+
+    return result;
   };
 };

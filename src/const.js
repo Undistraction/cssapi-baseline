@@ -46,4 +46,10 @@ export const CONFIG = [
     validator: validateIsNumberOrNumberWithPx,
     transformer: numberOrPxNumberToNumber,
   },
+  {
+    name: `baselineOffset`,
+    default: 0,
+    validator: validateIsNumberOrNumberWithPx,
+    transformer: numberOrPxNumberToNumber,
+  },
 ];

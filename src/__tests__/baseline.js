@@ -266,5 +266,34 @@ describe.only(`rhythm`, () => {
         });
       });
     });
+
+    describe(`with custom 'baselineOffset'`, () => {
+      const baseline = rhythm.configure({ baselineOffset: 2 });
+
+      describe(`using position`, () => {
+        it(`returns the correct line-height, font-size, position and top`, () => {
+          expect(baseline(16)).toEqual({
+            'font-size': `1rem`,
+            'line-height': `1.25rem`, // 1.5 lines
+            position: `relative`,
+            top: `0.125rem`, // 2 at 16
+          });
+
+          expect(baseline(8)).toEqual({
+            'font-size': `0.5rem`,
+            'line-height': `0.625rem`, // 1 line
+            position: `relative`,
+            top: `0.0625rem`, // 1 at 16
+          });
+
+          expect(baseline(32)).toEqual({
+            'font-size': `2rem`,
+            'line-height': `2.5rem`, // Two lines
+            position: `relative`,
+            top: `0.25rem`, // 4 at 32
+          });
+        });
+      });
+    });
   });
 });
