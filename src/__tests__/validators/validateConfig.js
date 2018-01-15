@@ -1,9 +1,10 @@
 import { validation as Validation } from 'folktale';
-import validateConfigValues from '../../validators/validateConfigValues';
+import validateConfig from '../../validators/validateConfig';
+import { CONFIG } from '../../constraints';
 
 const { Success, Failure } = Validation;
 
-describe(`validateConfigValues()`, () => {
+describe(`validateConfig()`, () => {
   describe(`with valid values`, () => {
     it(`returns a Validation.Success with the supplied value`, () => {
       const value = {
@@ -15,7 +16,7 @@ describe(`validateConfigValues()`, () => {
         baselineOffset: 0,
         baselineOffsetStrategy() {},
       };
-      const result = validateConfigValues(value);
+      const result = validateConfig(value);
       expect(Success.hasInstance(result)).toBeTruthy();
     });
   });
@@ -31,7 +32,7 @@ describe(`validateConfigValues()`, () => {
         baselineOffset: 0,
         baselineOffsetStrategy() {},
       };
-      const result = validateConfigValues(value);
+      const result = validateConfig(value);
       expect(Failure.hasInstance(result)).toBeTruthy();
       expect(result.value).toEqual([
         `Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`,

@@ -1,8 +1,6 @@
 import {
   reduce,
   assoc,
-  pluck,
-  always,
   curry,
   join,
   compose,
@@ -11,10 +9,6 @@ import {
   tap,
   equals,
   complement,
-  prop,
-  has,
-  map,
-  filter,
 } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import { CONFIG } from './constraints';
@@ -28,19 +22,6 @@ export const getDefaultConfig = _ =>
     {},
     CONFIG
   );
-
-const hasIsRequiredKey = has(`isRequired`);
-const pluckName = pluck(`name`);
-const propName = prop(`name`);
-
-export const configKeys = always(pluckName(CONFIG));
-export const requiredConfigKeys = always(
-  compose(map(propName), filter(hasIsRequiredKey))(CONFIG)
-);
-
-export const configValidatorsMap = always(
-  reduce((acc, { name, validator }) => assoc(name, validator, acc), {})(CONFIG)
-);
 
 const log = curry((loggingFunction, prefix) =>
   tap(

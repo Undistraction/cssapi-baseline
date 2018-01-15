@@ -1,8 +1,4 @@
-import { untilFailureValidator } from 'folktale-validations';
-import validateConfigKeys from './validateConfigKeys';
-import validateConfigValues from './validateConfigValues';
+import { validateObjectWithConstraints } from 'folktale-validations';
+import { CONFIG } from '../constraints';
 
-export default untilFailureValidator([
-  validateConfigKeys,
-  validateConfigValues,
-]);
+export default validateObjectWithConstraints(CONFIG);
