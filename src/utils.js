@@ -11,9 +11,13 @@ import {
   tap,
   equals,
   complement,
+  prop,
+  has,
+  map,
+  filter,
 } from 'ramda';
-import { CONFIG } from './const';
 import { isNotUndefined } from 'ramda-adjunct';
+import { CONFIG } from './constraints';
 
 export const getDefaultConfig = _ =>
   reduce(
@@ -25,7 +29,14 @@ export const getDefaultConfig = _ =>
     CONFIG
   );
 
-export const configKeys = always(pluck(`name`, CONFIG));
+const hasIsRequiredKey = has(`isRequired`);
+const pluckName = pluck(`name`);
+const propName = prop(`name`);
+
+export const configKeys = always(pluckName(CONFIG));
+export const requiredConfigKeys = always(
+  compose(map(propName), filter(hasIsRequiredKey))(CONFIG)
+);
 
 export const configValidatorsMap = always(
   reduce((acc, { name, validator }) => assoc(name, validator, acc), {})(CONFIG)
@@ -42,3 +53,5 @@ export const isNotZero = complement(isZero);
 
 // eslint-disable-next-line no-console
 export const logToConsole = log(console.log);
+
+export const joinWithComma = join(`, `);

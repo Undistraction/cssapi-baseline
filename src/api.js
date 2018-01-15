@@ -5,19 +5,16 @@ import {
   find,
   propEq,
   assoc,
-  gt,
-  curry,
   partial,
+  merge,
 } from 'ramda';
 import { outputWithUnit } from 'cssjs-units';
-import { CONFIG } from './const';
 import { throwError, invalidAPIParamsMessage } from './errors';
 import { linesForFontsize } from './math';
 import validateAPIArgs from './validators/validateAPIArgs';
 import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
 import { isNotZero } from './utils';
-
-const FONT_SIZE_FOR_OFFSET = 16;
+import { CONFIG } from './constraints';
 
 const transformConfig = (newConfig, [name, value]) => {
   const configItem = find(propEq(`name`, name), CONFIG);
@@ -26,16 +23,21 @@ const transformConfig = (newConfig, [name, value]) => {
 };
 
 export default config => {
-  const {
-    minLeading,
-    allowHalfLines,
-    baselineHeight,
-    renderUnit,
-    rootFontSize,
-    baselineOffset,
-  } = compose(reduce(transformConfig, {}), toPairs)(config);
+  const transformedConfig = compose(reduce(transformConfig, {}), toPairs)(
+    config
+  );
 
   return (fontSize, lines) => {
+    const {
+      minLeading,
+      allowHalfLines,
+      baselineHeight,
+      renderUnit,
+      rootFontSize,
+      baselineOffset,
+      baselineOffsetStrategy,
+    } = transformedConfig;
+
     validateAPIArgs(fontSize, lines).orElse(value => {
       throwError(invalidAPIParamsMessage(value));
     });
@@ -58,17 +60,16 @@ export default config => {
 
     const outputLineHeight = outputLines * baselineHeight;
 
-    const result = {
+    const styles = {
       'font-size': outputWithChosenUnit(unitlessFontSize),
       'line-height': outputWithChosenUnit(outputLineHeight),
     };
 
-    if (isNotZero(baselineOffset)) {
-      const offsetAtFontSize = fontSize / FONT_SIZE_FOR_OFFSET * baselineOffset;
-      result.position = `relative`;
-      result.top = outputWithChosenUnit(offsetAtFontSize);
-    }
-
-    return result;
+    return isNotZero(baselineOffset)
+      ? merge(
+          styles,
+          baselineOffsetStrategy(fontSize, baselineOffset, outputWithChosenUnit)
+        )
+      : styles;
   };
 };

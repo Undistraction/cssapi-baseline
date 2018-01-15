@@ -1,4 +1,11 @@
-import { validateKeys } from 'folktale-validations';
-import { configKeys } from '../utils';
+import {
+  untilFailureValidator,
+  validateWhitelistedKeys,
+  validateRequiredKeys,
+} from 'folktale-validations';
+import { configKeys, requiredConfigKeys } from '../utils';
 
-export default validateKeys(configKeys());
+export default untilFailureValidator([
+  validateWhitelistedKeys(configKeys()),
+  validateRequiredKeys(requiredConfigKeys()),
+]);

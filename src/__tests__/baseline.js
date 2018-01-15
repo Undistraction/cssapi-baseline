@@ -1,4 +1,5 @@
 import { isFunction } from 'ramda-adjunct';
+import sinon from 'sinon';
 
 import rhythm from '../index';
 
@@ -129,168 +130,189 @@ describe.only(`rhythm`, () => {
       });
     });
 
-    describe(`with custom 'rootFontSize'`, () => {
-      const baseline = rhythm.configure({ rootFontSize: 10 });
-
-      it(`returns the correct line-height and font-size`, () => {
-        expect(baseline(10)).toEqual({
-          'font-size': `1rem`,
-          'line-height': `2rem`, // 1 line
-        });
-
-        expect(baseline(8)).toEqual({
-          'font-size': `0.8rem`,
-          'line-height': `1rem`, // 0.5 lines
-        });
-
-        expect(baseline(18)).toEqual({
-          'font-size': `1.8rem`,
-          'line-height': `2rem`, // 1 line
-        });
-
-        expect(baseline(20)).toEqual({
-          'font-size': `2rem`,
-          'line-height': `3rem`,
-        });
-      });
-    });
-
-    describe(`with custom 'baselineHeight'`, () => {
-      const baseline = rhythm.configure({ baselineHeight: 20 });
-
-      it(`returns the correct line-height and font-size`, () => {
-        expect(baseline(16)).toEqual({
-          'font-size': `1rem`,
-          'line-height': `1.25rem`, // 1 line
-        });
-
-        expect(baseline(18)).toEqual({
-          'font-size': `1.125rem`,
-          'line-height': `1.25rem`, // 1 line
-        });
-
-        expect(baseline(8)).toEqual({
-          'font-size': `0.5rem`,
-          'line-height': `0.625rem`, // 0.5 lines
-        });
-      });
-    });
-
-    describe(`with custom 'renderUnit'`, () => {
-      describe(`px`, () => {
-        const baseline = rhythm.configure({ renderUnit: `px` });
+    describe(`with custom config values`, () => {
+      describe(`'rootFontSize'`, () => {
+        const baseline = rhythm.configure({ rootFontSize: 10 });
 
         it(`returns the correct line-height and font-size`, () => {
-          expect(baseline(16)).toEqual({
-            'font-size': `16px`,
-            'line-height': `20px`, // 1 line
-          });
-
-          expect(baseline(18)).toEqual({
-            'font-size': `18px`,
-            'line-height': `20px`, // 1 line
+          expect(baseline(10)).toEqual({
+            'font-size': `1rem`,
+            'line-height': `2rem`, // 1 line
           });
 
           expect(baseline(8)).toEqual({
-            'font-size': `8px`,
-            'line-height': `10px`, // 0.5 lines
-          });
-        });
-      });
-
-      describe(`em`, () => {
-        const baseline = rhythm.configure({ renderUnit: `em` });
-
-        it(`returns the correct line-height and font-size`, () => {
-          expect(baseline(16)).toEqual({
-            'font-size': `1em`,
-            'line-height': `1.25em`, // 1 line
+            'font-size': `0.8rem`,
+            'line-height': `1rem`, // 0.5 lines
           });
 
           expect(baseline(18)).toEqual({
-            'font-size': `1.125em`,
-            'line-height': `1.25em`, // 1 line
+            'font-size': `1.8rem`,
+            'line-height': `2rem`, // 1 line
           });
 
-          expect(baseline(8)).toEqual({
-            'font-size': `0.5em`,
-            'line-height': `0.625em`, // 0.5 lines
+          expect(baseline(20)).toEqual({
+            'font-size': `2rem`,
+            'line-height': `3rem`,
           });
         });
       });
-    });
 
-    describe(`with 'allowHalfLines' set to 'false'`, () => {
-      const baseline = rhythm.configure({ allowHalfLines: false });
+      describe(`'baselineHeight'`, () => {
+        const baseline = rhythm.configure({ baselineHeight: 20 });
 
-      it(`returns the correct line-height and font-size`, () => {
-        expect(baseline(16)).toEqual({
-          'font-size': `1rem`,
-          'line-height': `1.25rem`, // 1 line
-        });
-
-        expect(baseline(18)).toEqual({
-          'font-size': `1.125rem`,
-          'line-height': `1.25rem`, // 1 line
-        });
-
-        expect(baseline(8)).toEqual({
-          'font-size': `0.5rem`,
-          'line-height': `1.25rem`, // 1 line
-        });
-
-        expect(baseline(20)).toEqual({
-          'font-size': `1.25rem`,
-          'line-height': `2.5rem`, // 2 lines
-        });
-      });
-    });
-
-    describe(`with custom 'minLeading'`, () => {
-      const baseline = rhythm.configure({ minLeading: 6 });
-
-      it(`returns the correct line-height and font-size`, () => {
-        expect(baseline(16)).toEqual({
-          'font-size': `1rem`,
-          'line-height': `1.875rem`, // 1.5 lines
-        });
-
-        expect(baseline(8)).toEqual({
-          'font-size': `0.5rem`,
-          'line-height': `1.25rem`, // 1 line
-        });
-
-        expect(baseline(14)).toEqual({
-          'font-size': `0.875rem`,
-          'line-height': `1.25rem`, // Two lines
-        });
-      });
-    });
-
-    describe(`with custom 'baselineOffset'`, () => {
-      const baseline = rhythm.configure({ baselineOffset: 2 });
-
-      describe(`using position`, () => {
-        it(`returns the correct line-height, font-size, position and top`, () => {
+        it(`returns the correct line-height and font-size`, () => {
           expect(baseline(16)).toEqual({
             'font-size': `1rem`,
-            'line-height': `1.25rem`, // 1.5 lines
-            position: `relative`,
-            top: `0.125rem`, // 2 at 16
+            'line-height': `1.25rem`, // 1 line
+          });
+
+          expect(baseline(18)).toEqual({
+            'font-size': `1.125rem`,
+            'line-height': `1.25rem`, // 1 line
           });
 
           expect(baseline(8)).toEqual({
             'font-size': `0.5rem`,
-            'line-height': `0.625rem`, // 1 line
-            position: `relative`,
-            top: `0.0625rem`, // 1 at 16
+            'line-height': `0.625rem`, // 0.5 lines
+          });
+        });
+      });
+
+      describe(`'renderUnit'`, () => {
+        describe(`px`, () => {
+          const baseline = rhythm.configure({ renderUnit: `px` });
+
+          it(`returns the correct line-height and font-size`, () => {
+            expect(baseline(16)).toEqual({
+              'font-size': `16px`,
+              'line-height': `20px`, // 1 line
+            });
+
+            expect(baseline(18)).toEqual({
+              'font-size': `18px`,
+              'line-height': `20px`, // 1 line
+            });
+
+            expect(baseline(8)).toEqual({
+              'font-size': `8px`,
+              'line-height': `10px`, // 0.5 lines
+            });
+          });
+        });
+
+        describe(`em`, () => {
+          const baseline = rhythm.configure({ renderUnit: `em` });
+
+          it(`returns the correct line-height and font-size`, () => {
+            expect(baseline(16)).toEqual({
+              'font-size': `1em`,
+              'line-height': `1.25em`, // 1 line
+            });
+
+            expect(baseline(18)).toEqual({
+              'font-size': `1.125em`,
+              'line-height': `1.25em`, // 1 line
+            });
+
+            expect(baseline(8)).toEqual({
+              'font-size': `0.5em`,
+              'line-height': `0.625em`, // 0.5 lines
+            });
+          });
+        });
+      });
+
+      describe(`'allowHalfLines' set to 'false'`, () => {
+        const baseline = rhythm.configure({ allowHalfLines: false });
+
+        it(`returns the correct line-height and font-size`, () => {
+          expect(baseline(16)).toEqual({
+            'font-size': `1rem`,
+            'line-height': `1.25rem`, // 1 line
           });
 
-          expect(baseline(32)).toEqual({
-            'font-size': `2rem`,
-            'line-height': `2.5rem`, // Two lines
-            position: `relative`,
-            top: `0.25rem`, // 4 at 32
+          expect(baseline(18)).toEqual({
+            'font-size': `1.125rem`,
+            'line-height': `1.25rem`, // 1 line
+          });
+
+          expect(baseline(8)).toEqual({
+            'font-size': `0.5rem`,
+            'line-height': `1.25rem`, // 1 line
+          });
+
+          expect(baseline(20)).toEqual({
+            'font-size': `1.25rem`,
+            'line-height': `2.5rem`, // 2 lines
+          });
+        });
+      });
+
+      describe(`'minLeading'`, () => {
+        const baseline = rhythm.configure({ minLeading: 6 });
+
+        it(`returns the correct line-height and font-size`, () => {
+          expect(baseline(16)).toEqual({
+            'font-size': `1rem`,
+            'line-height': `1.875rem`, // 1.5 lines
+          });
+
+          expect(baseline(8)).toEqual({
+            'font-size': `0.5rem`,
+            'line-height': `1.25rem`, // 1 line
+          });
+
+          expect(baseline(14)).toEqual({
+            'font-size': `0.875rem`,
+            'line-height': `1.25rem`, // Two lines
+          });
+        });
+      });
+
+      describe(`'baselineOffset'`, () => {
+        const baseline = rhythm.configure({ baselineOffset: 2 });
+
+        describe(`using position`, () => {
+          it(`returns the correct line-height, font-size, position and top`, () => {
+            expect(baseline(16)).toEqual({
+              'font-size': `1rem`,
+              'line-height': `1.25rem`, // 1.5 lines
+              position: `relative`,
+              top: `0.125rem`, // 2 at 16
+            });
+
+            expect(baseline(8)).toEqual({
+              'font-size': `0.5rem`,
+              'line-height': `0.625rem`, // 1 line
+              position: `relative`,
+              top: `0.0625rem`, // 1 at 16
+            });
+
+            expect(baseline(32)).toEqual({
+              'font-size': `2rem`,
+              'line-height': `2.5rem`, // Two lines
+              position: `relative`,
+              top: `0.25rem`, // 4 at 32
+            });
+          });
+        });
+      });
+
+      describe(`'baselineOffsetStrategy'`, () => {
+        const baselineOffsetStrategy = sinon.stub().returns({ a: `b` });
+        const baseline = rhythm.configure({
+          baselineOffset: 2,
+          baselineOffsetStrategy,
+        });
+
+        describe(`using position`, () => {
+          it(`returns the correct line-height, font-size, position and top`, () => {
+            expect(baseline(16)).toEqual({
+              'font-size': `1rem`,
+              'line-height': `1.25rem`, // 1.5 lines
+              a: `b`,
+            });
+            expect(baselineOffsetStrategy.calledOnce).toBeTruthy();
           });
         });
       });

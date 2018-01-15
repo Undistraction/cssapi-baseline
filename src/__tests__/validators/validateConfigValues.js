@@ -13,6 +13,7 @@ describe(`validateConfigValues()`, () => {
         renderUnit: `px`,
         allowHalfLines: true,
         baselineOffset: 0,
+        baselineOffsetStrategy() {},
       };
       const result = validateConfigValues(value);
       expect(Success.hasInstance(result)).toBeTruthy();
@@ -28,6 +29,7 @@ describe(`validateConfigValues()`, () => {
         renderUnit: `px`,
         allowHalfLines: true,
         baselineOffset: 0,
+        baselineOffsetStrategy() {},
       };
       const result = validateConfigValues(value);
       expect(Failure.hasInstance(result)).toBeTruthy();
