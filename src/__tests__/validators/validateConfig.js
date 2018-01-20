@@ -1,6 +1,5 @@
 import { validation as Validation } from 'folktale';
 import validateConfig from '../../validators/validateConfig';
-import { CONFIG } from '../../constraints';
 
 const { Success, Failure } = Validation;
 
@@ -35,7 +34,7 @@ describe(`validateConfig()`, () => {
       const result = validateConfig(value);
       expect(Failure.hasInstance(result)).toBeTruthy();
       expect(result.value).toEqual([
-        `Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`,
+        `Object Invalid: Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`,
       ]);
     });
   });

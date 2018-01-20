@@ -1246,6 +1246,10 @@ deep-extend@~0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.4.2.tgz#48b699c27e334bf89f10892be432f6e4c7d34a7f"
 
+deep-freeze@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/deep-freeze/-/deep-freeze-0.0.1.tgz#3a0b0005de18672819dfd38cd31f91179c893e84"
+
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
@@ -1806,11 +1810,12 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-folktale-validations@^0.0.35:
-  version "0.0.35"
-  resolved "https://registry.yarnpkg.com/folktale-validations/-/folktale-validations-0.0.35.tgz#862a64edeabed19d29dd5a1ec8003d35105dd502"
+folktale-validations@^0.0.42:
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/folktale-validations/-/folktale-validations-0.0.42.tgz#be7ed4cb5522c4b67546c3945c33850531b04957"
   dependencies:
     cssjs-units "^0.2.12"
+    deep-freeze "^0.0.1"
     folktale "^2.0.1"
     ramda "^0.25.0"
     ramda-adjunct "^2.1.0"

@@ -1,13 +1,4 @@
-import {
-  reduce,
-  compose,
-  toPairs,
-  find,
-  propEq,
-  assoc,
-  partial,
-  merge,
-} from 'ramda';
+import { partial, merge } from 'ramda';
 import { outputWithUnit } from 'cssjs-units';
 import { throwError, invalidAPIParamsMessage } from './errors';
 import { linesForFontsize } from './math';

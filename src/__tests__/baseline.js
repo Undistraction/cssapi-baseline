@@ -1,24 +1,26 @@
 import { isFunction } from 'ramda-adjunct';
 import sinon from 'sinon';
 
-import rhythm from '../index';
+import baseline from '../index';
 
-describe.only(`rhythm`, () => {
+console.log(`BASELINE`, baseline);
+
+describe.only(`baseline`, () => {
   describe(`configure()`, () => {
     describe(`with no arguments`, () => {
       it(`doesn't throw`, () => {
-        expect(() => rhythm.configure()).not.toThrow();
+        expect(() => baseline.configure()).not.toThrow();
       });
 
       it(`returns a function`, () => {
-        expect(isFunction(rhythm.configure())).toBeTruthy();
+        expect(isFunction(baseline.configure())).toBeTruthy();
       });
     });
 
     describe(`with an invalid argument`, () => {
       it(`throws`, () => {
         const value = `x`;
-        expect(() => rhythm.configure(value)).toThrow(
+        expect(() => baseline.configure(value)).toThrow(
           `The config object was invalid: Wasn't type: 'Object'`
         );
       });
@@ -27,8 +29,8 @@ describe.only(`rhythm`, () => {
     describe(`with invalid config param names`, () => {
       it(`throws`, () => {
         const value = { a: 1, b: 2 };
-        expect(() => rhythm.configure(value)).toThrow(
-          `The config object was invalid: Object included invalid key(s): '[a, b]`
+        expect(() => baseline.configure(value)).toThrow(
+          `The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]'`
         );
       });
     });
@@ -36,8 +38,8 @@ describe.only(`rhythm`, () => {
     describe(`with invalid config param keys`, () => {
       it(`throws`, () => {
         const value = { rootFontSize: `x`, baselineHeight: `100%` };
-        expect(() => rhythm.configure(value)).toThrow(
-          `The config object was invalid: Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`
+        expect(() => baseline.configure(value)).toThrow(
+          `The config object was invalid: Object Invalid: Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`
         );
       });
     });
@@ -45,34 +47,34 @@ describe.only(`rhythm`, () => {
 
   describe(`api`, () => {
     describe(`with defaults`, () => {
-      const baseline = rhythm.configure();
+      const bl = baseline.configure();
 
       describe(`with param 'font-size'`, () => {
         describe(`invalid value`, () => {
           it(`throws`, () => {
-            expect(() => baseline(`x`)).toThrowError(
+            expect(() => bl(`x`)).toThrowError(
               `The values supplied were invalid: Wasn't a valid Number and Wasn't number with unit: 'px'`
             );
           });
 
           describe(`valid unitless value`, () => {
             it(`returns the correct line-height and font-size`, () => {
-              expect(baseline(16)).toEqual({
+              expect(bl(16)).toEqual({
                 'font-size': `1rem`,
                 'line-height': `1.25rem`,
               });
 
-              expect(baseline(19)).toEqual({
+              expect(bl(19)).toEqual({
                 'font-size': `1.1875rem`,
                 'line-height': `1.875rem`,
               });
 
-              expect(baseline(19)).toEqual({
+              expect(bl(19)).toEqual({
                 'font-size': `1.1875rem`,
                 'line-height': `1.875rem`,
               });
 
-              expect(baseline(6)).toEqual({
+              expect(bl(6)).toEqual({
                 'font-size': `0.375rem`,
                 'line-height': `0.625rem`,
               });
@@ -81,22 +83,22 @@ describe.only(`rhythm`, () => {
 
           describe(`valid united value`, () => {
             it(`returns the correct line-height and font-size`, () => {
-              expect(baseline(`16px`)).toEqual({
+              expect(bl(`16px`)).toEqual({
                 'font-size': `1rem`,
                 'line-height': `1.25rem`,
               });
 
-              expect(baseline(`19px`)).toEqual({
+              expect(bl(`19px`)).toEqual({
                 'font-size': `1.1875rem`,
                 'line-height': `1.875rem`,
               });
 
-              expect(baseline(`19px`)).toEqual({
+              expect(bl(`19px`)).toEqual({
                 'font-size': `1.1875rem`,
                 'line-height': `1.875rem`,
               });
 
-              expect(baseline(`6px`)).toEqual({
+              expect(bl(`6px`)).toEqual({
                 'font-size': `0.375rem`,
                 'line-height': `0.625rem`,
               });
@@ -108,7 +110,7 @@ describe.only(`rhythm`, () => {
       describe(`with param 'lines'`, () => {
         describe(`invalid value`, () => {
           it(`throws`, () => {
-            expect(() => baseline(`x`)).toThrowError(
+            expect(() => bl(`x`)).toThrowError(
               `The values supplied were invalid: Wasn't a valid Number and Wasn't number with unit: 'px'`
             );
           });
@@ -116,12 +118,12 @@ describe.only(`rhythm`, () => {
 
         describe(`valid value`, () => {
           it(`returns the correct line-height and font-size`, () => {
-            expect(baseline(16, 3)).toEqual({
+            expect(bl(16, 3)).toEqual({
               'font-size': `1rem`,
               'line-height': `3.75rem`,
             });
 
-            expect(baseline(8, 1.5)).toEqual({
+            expect(bl(8, 1.5)).toEqual({
               'font-size': `0.5rem`,
               'line-height': `1.875rem`,
             });
@@ -132,25 +134,25 @@ describe.only(`rhythm`, () => {
 
     describe(`with custom config values`, () => {
       describe(`'rootFontSize'`, () => {
-        const baseline = rhythm.configure({ rootFontSize: 10 });
+        const bl = baseline.configure({ rootFontSize: 10 });
 
         it(`returns the correct line-height and font-size`, () => {
-          expect(baseline(10)).toEqual({
+          expect(bl(10)).toEqual({
             'font-size': `1rem`,
             'line-height': `2rem`, // 1 line
           });
 
-          expect(baseline(8)).toEqual({
+          expect(bl(8)).toEqual({
             'font-size': `0.8rem`,
             'line-height': `1rem`, // 0.5 lines
           });
 
-          expect(baseline(18)).toEqual({
+          expect(bl(18)).toEqual({
             'font-size': `1.8rem`,
             'line-height': `2rem`, // 1 line
           });
 
-          expect(baseline(20)).toEqual({
+          expect(bl(20)).toEqual({
             'font-size': `2rem`,
             'line-height': `3rem`,
           });
@@ -158,20 +160,20 @@ describe.only(`rhythm`, () => {
       });
 
       describe(`'baselineHeight'`, () => {
-        const baseline = rhythm.configure({ baselineHeight: 20 });
+        const bl = baseline.configure({ baselineHeight: 20 });
 
         it(`returns the correct line-height and font-size`, () => {
-          expect(baseline(16)).toEqual({
+          expect(bl(16)).toEqual({
             'font-size': `1rem`,
             'line-height': `1.25rem`, // 1 line
           });
 
-          expect(baseline(18)).toEqual({
+          expect(bl(18)).toEqual({
             'font-size': `1.125rem`,
             'line-height': `1.25rem`, // 1 line
           });
 
-          expect(baseline(8)).toEqual({
+          expect(bl(8)).toEqual({
             'font-size': `0.5rem`,
             'line-height': `0.625rem`, // 0.5 lines
           });
@@ -180,20 +182,20 @@ describe.only(`rhythm`, () => {
 
       describe(`'renderUnit'`, () => {
         describe(`px`, () => {
-          const baseline = rhythm.configure({ renderUnit: `px` });
+          const bl = baseline.configure({ renderUnit: `px` });
 
           it(`returns the correct line-height and font-size`, () => {
-            expect(baseline(16)).toEqual({
+            expect(bl(16)).toEqual({
               'font-size': `16px`,
               'line-height': `20px`, // 1 line
             });
 
-            expect(baseline(18)).toEqual({
+            expect(bl(18)).toEqual({
               'font-size': `18px`,
               'line-height': `20px`, // 1 line
             });
 
-            expect(baseline(8)).toEqual({
+            expect(bl(8)).toEqual({
               'font-size': `8px`,
               'line-height': `10px`, // 0.5 lines
             });
@@ -201,20 +203,20 @@ describe.only(`rhythm`, () => {
         });
 
         describe(`em`, () => {
-          const baseline = rhythm.configure({ renderUnit: `em` });
+          const bl = baseline.configure({ renderUnit: `em` });
 
           it(`returns the correct line-height and font-size`, () => {
-            expect(baseline(16)).toEqual({
+            expect(bl(16)).toEqual({
               'font-size': `1em`,
               'line-height': `1.25em`, // 1 line
             });
 
-            expect(baseline(18)).toEqual({
+            expect(bl(18)).toEqual({
               'font-size': `1.125em`,
               'line-height': `1.25em`, // 1 line
             });
 
-            expect(baseline(8)).toEqual({
+            expect(bl(8)).toEqual({
               'font-size': `0.5em`,
               'line-height': `0.625em`, // 0.5 lines
             });
@@ -223,25 +225,25 @@ describe.only(`rhythm`, () => {
       });
 
       describe(`'allowHalfLines' set to 'false'`, () => {
-        const baseline = rhythm.configure({ allowHalfLines: false });
+        const bl = baseline.configure({ allowHalfLines: false });
 
         it(`returns the correct line-height and font-size`, () => {
-          expect(baseline(16)).toEqual({
+          expect(bl(16)).toEqual({
             'font-size': `1rem`,
             'line-height': `1.25rem`, // 1 line
           });
 
-          expect(baseline(18)).toEqual({
+          expect(bl(18)).toEqual({
             'font-size': `1.125rem`,
             'line-height': `1.25rem`, // 1 line
           });
 
-          expect(baseline(8)).toEqual({
+          expect(bl(8)).toEqual({
             'font-size': `0.5rem`,
             'line-height': `1.25rem`, // 1 line
           });
 
-          expect(baseline(20)).toEqual({
+          expect(bl(20)).toEqual({
             'font-size': `1.25rem`,
             'line-height': `2.5rem`, // 2 lines
           });
@@ -249,20 +251,20 @@ describe.only(`rhythm`, () => {
       });
 
       describe(`'minLeading'`, () => {
-        const baseline = rhythm.configure({ minLeading: 6 });
+        const bl = baseline.configure({ minLeading: 6 });
 
         it(`returns the correct line-height and font-size`, () => {
-          expect(baseline(16)).toEqual({
+          expect(bl(16)).toEqual({
             'font-size': `1rem`,
             'line-height': `1.875rem`, // 1.5 lines
           });
 
-          expect(baseline(8)).toEqual({
+          expect(bl(8)).toEqual({
             'font-size': `0.5rem`,
             'line-height': `1.25rem`, // 1 line
           });
 
-          expect(baseline(14)).toEqual({
+          expect(bl(14)).toEqual({
             'font-size': `0.875rem`,
             'line-height': `1.25rem`, // Two lines
           });
@@ -270,25 +272,25 @@ describe.only(`rhythm`, () => {
       });
 
       describe(`'baselineOffset'`, () => {
-        const baseline = rhythm.configure({ baselineOffset: 2 });
+        const bl = baseline.configure({ baselineOffset: 2 });
 
         describe(`using position`, () => {
           it(`returns the correct line-height, font-size, position and top`, () => {
-            expect(baseline(16)).toEqual({
+            expect(bl(16)).toEqual({
               'font-size': `1rem`,
               'line-height': `1.25rem`, // 1.5 lines
               position: `relative`,
               top: `0.125rem`, // 2 at 16
             });
 
-            expect(baseline(8)).toEqual({
+            expect(bl(8)).toEqual({
               'font-size': `0.5rem`,
               'line-height': `0.625rem`, // 1 line
               position: `relative`,
               top: `0.0625rem`, // 1 at 16
             });
 
-            expect(baseline(32)).toEqual({
+            expect(bl(32)).toEqual({
               'font-size': `2rem`,
               'line-height': `2.5rem`, // Two lines
               position: `relative`,
@@ -300,14 +302,14 @@ describe.only(`rhythm`, () => {
 
       describe(`'baselineOffsetStrategy'`, () => {
         const baselineOffsetStrategy = sinon.stub().returns({ a: `b` });
-        const baseline = rhythm.configure({
+        const bl = baseline.configure({
           baselineOffset: 2,
           baselineOffsetStrategy,
         });
 
         describe(`using position`, () => {
           it(`returns the correct line-height, font-size, position and top`, () => {
-            expect(baseline(16)).toEqual({
+            expect(bl(16)).toEqual({
               'font-size': `1rem`,
               'line-height': `1.25rem`, // 1.5 lines
               a: `b`,

@@ -1,11 +1,8 @@
-import { merge, compose } from 'ramda';
+import { compose } from 'ramda';
 import { validateIsObject } from 'folktale-validations';
-import { getDefaultConfig } from './utils';
 import { throwError, invalidConfigMessage } from './errors';
 import validateConfig from './validators/validateConfig';
 import api from './api';
-
-const mergeDefaults = merge(getDefaultConfig());
 
 const throwOrBuildApi = config =>
   validateConfig(config).matchWith({
@@ -17,7 +14,7 @@ const throwOrBuildApi = config =>
 
 const configure = (config = {}) =>
   validateIsObject(config).matchWith({
-    Success: ({ value }) => compose(throwOrBuildApi, mergeDefaults)(value),
+    Success: ({ value }) => throwOrBuildApi(value),
     Failure: ({ value }) => compose(throwError, invalidConfigMessage)(value),
   });
 

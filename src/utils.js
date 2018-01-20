@@ -1,6 +1,4 @@
 import {
-  reduce,
-  assoc,
   curry,
   join,
   compose,
@@ -10,18 +8,6 @@ import {
   equals,
   complement,
 } from 'ramda';
-import { isNotUndefined } from 'ramda-adjunct';
-import { CONFIG } from './constraints';
-
-export const getDefaultConfig = _ =>
-  reduce(
-    (acc, value) =>
-      isNotUndefined(value.default)
-        ? assoc(value.name, value.default, acc)
-        : acc,
-    {},
-    CONFIG
-  );
 
 const log = curry((loggingFunction, prefix) =>
   tap(
