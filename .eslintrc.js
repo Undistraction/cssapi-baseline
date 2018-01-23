@@ -3,6 +3,7 @@ module.exports = {
     'eslint-config-airbnb-base',
     'prettier',
     'plugin:ramda/recommended',
+    'plugin:ramda/recommended',
   ],
   plugins: ['prettier', 'react', 'ramda', 'styled-components-config'],
   env: {
