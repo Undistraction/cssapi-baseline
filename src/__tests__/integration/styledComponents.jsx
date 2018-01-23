@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import renderer from 'react-test-renderer';
 import 'jest-styled-components';
-import rhythm from '../../index';
+import createBaseline from '../../index';
 
 describe(`works with styled-components`, () => {
-  const baseline = rhythm.configure();
+  const baseline = createBaseline();
   const Element = styled.div`
     ${baseline(16)};
   `;

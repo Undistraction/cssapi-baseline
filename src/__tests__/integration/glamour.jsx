@@ -2,11 +2,11 @@ import React from 'react';
 import * as glamor from 'glamor';
 import renderer from 'react-test-renderer';
 import serializer from 'jest-glamor-react';
-import rhythm from '../../index';
+import createBaseline from '../../index';
 
 expect.addSnapshotSerializer(serializer);
 
-const baseline = rhythm.configure();
+const baseline = createBaseline();
 
 function Element() {
   const className = glamor.css({
