@@ -1,6 +1,10 @@
 module.exports = {
-  extends: ['eslint-config-airbnb-base', 'prettier'],
-  plugins: ['prettier', 'react'],
+  extends: [
+    'eslint-config-airbnb-base',
+    'prettier',
+    'plugin:ramda/recommended',
+  ],
+  plugins: ['prettier', 'react', 'ramda', 'styled-components-config'],
   env: {
     browser: true,
     jest: true,
@@ -35,5 +39,6 @@ module.exports = {
         argsIgnorePattern: '^_$',
       },
     ],
+    'react/jsx-uses-vars': ['error'],
   },
 };
