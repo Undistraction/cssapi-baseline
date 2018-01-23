@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`works with galmour renders component with correct 'font-size' and 'line-height' 1`] = `
+exports[`works with galmour renders component with correct 'fontSize' and 'lineHeight' 1`] = `
 .glamor-0,
 [data-glamor-0] {
   font-size: 1rem;

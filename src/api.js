@@ -40,8 +40,8 @@ export default config => (fontSize, lines) => {
   const outputLineHeight = outputLines * baselineHeight;
 
   const styles = {
-    'font-size': outputWithChosenUnit(unitlessFontSize),
-    'line-height': outputWithChosenUnit(outputLineHeight),
+    fontSize: outputWithChosenUnit(unitlessFontSize),
+    lineHeight: outputWithChosenUnit(outputLineHeight),
   };
 
   return isNotZero(baselineOffset)
