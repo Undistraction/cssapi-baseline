@@ -7,7 +7,18 @@ import {
   tap,
   equals,
   complement,
+  both,
+  isEmpty,
+  reject,
+  anyPass,
+  prop,
 } from 'ramda';
+import { isString, isArray } from 'ramda-adjunct';
+import { isUndefined } from 'util';
+
+// -----------------------------------------------------------------------------
+// Logging
+// -----------------------------------------------------------------------------
 
 const log = curry((loggingFunction, prefix) =>
   tap(
@@ -15,10 +26,38 @@ const log = curry((loggingFunction, prefix) =>
   )
 );
 
-const isZero = equals(0);
-export const isNotZero = complement(isZero);
-
 // eslint-disable-next-line no-console
 export const logToConsole = log(console.log);
 
-export const joinWithComma = join(`, `);
+// ---------------------------------------------------------------------------
+// Predicates
+// ---------------------------------------------------------------------------
+
+const isZero = equals(0);
+export const isNotZero = complement(isZero);
+export const isEmptyArray = both(isArray, isEmpty);
+export const isEmptyString = both(isString, isEmpty);
+
+// -----------------------------------------------------------------------------
+// String
+// -----------------------------------------------------------------------------
+
+export const quote = value => `'${value}'`;
+
+export const joinDefined = s => v => {
+  const remaining = reject(anyPass([isEmptyString, isEmptyArray, isUndefined]))(
+    v
+  );
+  const result = join(s, remaining);
+  return result;
+};
+
+export const joinWithComma = joinDefined(`, `);
+export const joinWithColon = joinDefined(`: `);
+export const joinWithSpace = joinDefined(` `);
+
+// -----------------------------------------------------------------------------
+// Props
+// -----------------------------------------------------------------------------
+
+export const propValue = prop(`value`);

@@ -19,7 +19,7 @@ describe.only(`baseline`, () => {
       it(`throws`, () => {
         const value = `x`;
         expect(() => baseline.configure(value)).toThrow(
-          `The config object was invalid: Wasn't type: 'Object'`
+          `[cssjs-baseline] configure() The config object was invalid: Wasn't type: 'Object'`
         );
       });
     });
@@ -29,7 +29,7 @@ describe.only(`baseline`, () => {
         const value = { a: 1, b: 2 };
 
         expect(() => baseline.configure(value)).toThrow(
-          `The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]'`
+          `[cssjs-baseline] configure() The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]'`
         );
       });
     });
@@ -38,7 +38,7 @@ describe.only(`baseline`, () => {
       it(`throws`, () => {
         const value = { rootFontSize: `x`, baselineHeight: `100%` };
         expect(() => baseline.configure(value)).toThrow(
-          `The config object was invalid: Object Invalid: Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`
+          `[cssjs-baseline] configure() The config object was invalid: Object Invalid: Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`
         );
       });
     });
@@ -52,7 +52,7 @@ describe.only(`baseline`, () => {
         describe(`invalid value`, () => {
           it(`throws`, () => {
             expect(() => bl(`x`)).toThrowError(
-              `The values supplied were invalid: Wasn't a valid Number and Wasn't number with unit: 'px'`
+              `[cssjs-baseline] api() The values supplied were invalid: Wasn't a valid Number and Wasn't number with unit: 'px'`
             );
           });
 
@@ -110,7 +110,7 @@ describe.only(`baseline`, () => {
         describe(`invalid value`, () => {
           it(`throws`, () => {
             expect(() => bl(`x`)).toThrowError(
-              `The values supplied were invalid: Wasn't a valid Number and Wasn't number with unit: 'px'`
+              `[cssjs-baseline] api() The values supplied were invalid: Wasn't a valid Number and Wasn't number with unit: 'px'`
             );
           });
         });

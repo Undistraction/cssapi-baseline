@@ -1,13 +1,20 @@
+import { divide, flip } from 'ramda';
 import { FONT_SIZE_FOR_OFFSET } from './const';
 
-const linesForFontSizeAct = (minLeading, lineHeight, fontSize) => {
-  const lines = Math.ceil(fontSize / lineHeight);
+const divideBy2 = flip(divide)(2);
+
+const wholeLinesForFontSize = (minLeading, fontSize, baselineHeight) => {
+  const lines = Math.ceil(fontSize / baselineHeight);
   const linesWithLeading =
-    lines * lineHeight - fontSize >= minLeading ? lines : lines + 1;
+    lines * baselineHeight - fontSize >= minLeading ? lines : lines + 1;
   return linesWithLeading;
 };
 
-// eslint-disable-next-line import/prefer-default-export
+const halfLinesForFontSize = (minLeading, fontSize, baselineHeight) =>
+  divideBy2(
+    wholeLinesForFontSize(minLeading, fontSize, divideBy2(baselineHeight))
+  );
+
 export const linesForFontsize = (
   minLeading,
   allowHalfLines,
@@ -15,7 +22,8 @@ export const linesForFontsize = (
   fontSize
 ) =>
   allowHalfLines
-    ? linesForFontSizeAct(minLeading, baselineHeight * 0.5, fontSize) * 0.5
-    : linesForFontSizeAct(minLeading, baselineHeight, fontSize);
+    ? halfLinesForFontSize(minLeading, fontSize, baselineHeight)
+    : wholeLinesForFontSize(minLeading, fontSize, baselineHeight);
 
-export const baselineOffsetAtFontSize = (fontSize, offset) => fontSize / FONT_SIZE_FOR_OFFSET * offset;
+export const baselineOffsetAtFontSize = (fontSize, offset) =>
+  fontSize / FONT_SIZE_FOR_OFFSET * offset;
