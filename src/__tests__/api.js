@@ -1,17 +1,27 @@
+import { map } from 'ramda';
 import sinon from 'sinon';
 import createBaseline from '../index';
+import { notNumberOrUndefined } from './testHelpers/fixtures';
 
 describe(`api`, () => {
   describe(`with defaults`, () => {
     const baseline = createBaseline();
 
+    describe(`with no args`, () => {
+      expect(() => baseline()).toThrowError(
+        `api() Missing required arguments ['fontSize']`
+      );
+    });
+
     describe(`params`, () => {
       describe(`'fontSize'`, () => {
         describe(`invalid value`, () => {
           it(`throws`, () => {
-            expect(() => baseline(`x`)).toThrowError(
-              `[cssjs-baseline] api() The values supplied were invalid: Wasn't a valid Number and Wasn't number with unit: 'px'`
-            );
+            map(invalidValue => {
+              expect(() => baseline(invalidValue)).toThrowError(
+                `[cssapi-baseline] api() You supplied invalid Arguments Argument 'fontSize': Wasn't a valid Number and Wasn't number with unit: 'px'`
+              );
+            })(notNumberOrUndefined);
           });
 
           describe(`valid unitless value`, () => {
@@ -66,11 +76,12 @@ describe(`api`, () => {
 
       describe(`'lines'`, () => {
         describe(`invalid value`, () => {
-          it(`throws`, () => {
-            expect(() => baseline(`x`)).toThrowError(
-              `[cssjs-baseline] api() The values supplied were invalid: Wasn't a valid Number and Wasn't number with unit: 'px'`
+          map(invalidValue => {
+            console.log(`V`, invalidValue);
+            expect(() => baseline(16, invalidValue)).toThrowError(
+              `[cssapi-baseline] api() You supplied invalid Arguments Argument 'lines': Wasn't a valid Number`
             );
-          });
+          })(notNumberOrUndefined);
         });
 
         describe(`valid value`, () => {

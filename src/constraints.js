@@ -2,6 +2,7 @@ import {
   validateIsBoolean,
   validateIsWhitelistedString,
   validateIsFunction,
+  validateIsValidNumber,
 } from 'folktale-validations';
 import { values } from 'ramda';
 import validateIsNumberOrNumberWithPx from './validators/validateIsNumberOrNumberWithPx';
@@ -10,7 +11,7 @@ import offsetWithPosition from './baselineOffsetStrategies/offsetWithPosition';
 import { UNITS } from './const';
 
 // eslint-disable-next-line import/prefer-default-export
-export default {
+export const CONFIG = {
   fields: [
     {
       name: `rootFontSize`,
@@ -50,6 +51,21 @@ export default {
       name: `baselineOffsetStrategy`,
       defaultValue: offsetWithPosition,
       validator: validateIsFunction,
+    },
+  ],
+};
+
+export const API = {
+  fields: [
+    {
+      name: `fontSize`,
+      isRequired: true,
+      validator: validateIsNumberOrNumberWithPx,
+      transformer: numberOrPxNumberToNumber,
+    },
+    {
+      name: `lines`,
+      validator: validateIsValidNumber,
     },
   ],
 };

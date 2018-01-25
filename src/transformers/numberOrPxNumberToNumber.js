@@ -1,4 +1,4 @@
-import { numericPartOfUnitedNumber } from 'cssjs-units';
+import { numericPartOfUnitedNumber } from 'cssapi-units';
 import { isNumber } from 'ramda-adjunct';
 
 export default numberOrPxNumber =>

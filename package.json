@@ -1,10 +1,10 @@
 {
-  "name": "cssjs-baseline",
+  "name": "cssapi-baseline",
   "version": "0.0.1",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Undistraction/cssjs-baseline.git"
+    "url": "git+https://github.com/Undistraction/cssapi-baseline.git"
   },
   "files": [
     "dist",
@@ -15,9 +15,9 @@
   "author": "Pedr Browne",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Undistraction/cssjs-baseline/issues"
+    "url": "https://github.com/Undistraction/cssapi-baseline/issues"
   },
-  "homepage": "https://github.com/Undistraction/cssjs-baseline",
+  "homepage": "https://github.com/Undistraction/cssapi-baseline",
   "scripts": {
     "build": "npm run build:lib && npm run build:dist",
     "prebuild:lib": "rimraf lib/*",
@@ -74,9 +74,9 @@
     "styled-components": "^2.4.0"
   },
   "dependencies": {
-    "cssjs-units": "^0.2.12",
+    "cssapi-units": "^0.3.0",
     "folktale": "^2.0.1",
-    "folktale-validations": "^0.0.42",
+    "folktale-validations": "^0.0.45",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.1.0"
   }

@@ -1,10 +1,10 @@
-import { partial, merge, defaultTo, multiply } from 'ramda';
-import { outputWithUnit } from 'cssjs-units';
+import { partial, merge, defaultTo, multiply, compose } from 'ramda';
+import { outputWithUnit } from 'cssapi-units';
 import { invalidAPIParamsMessage, throwAPIError } from './errors';
 import { linesForFontsize } from './math';
 import validateAPIArgs from './validators/validateAPIArgs';
 import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
-import { isNotZero } from './utils';
+import { isNotZero, withoutUndefined } from './utils';
 
 export default config => {
   const {
@@ -18,9 +18,9 @@ export default config => {
   } = config;
 
   return (fontSize, lines) => {
-    validateAPIArgs(fontSize, lines).orElse(value => {
-      throwAPIError(invalidAPIParamsMessage(value));
-    });
+    validateAPIArgs(withoutUndefined({ fontSize, lines })).orElse(
+      compose(throwAPIError, invalidAPIParamsMessage)
+    );
 
     const unitlessFontSize = numberOrPxNumberToNumber(fontSize);
 

@@ -16,7 +16,7 @@ describe(`configure()`, () => {
     it(`throws`, () => {
       const value = `x`;
       expect(() => createBaseline(value)).toThrow(
-        `[cssjs-baseline] configure() The config object was invalid: Wasn't type: 'Object'`
+        `[cssapi-baseline] configure() The config object was invalid: Wasn't type: 'Object'`
       );
     });
   });
@@ -26,7 +26,7 @@ describe(`configure()`, () => {
       const value = { a: 1, b: 2 };
 
       expect(() => createBaseline(value)).toThrow(
-        `[cssjs-baseline] configure() The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]'`
+        `[cssapi-baseline] configure() The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]'`
       );
     });
   });
@@ -35,7 +35,7 @@ describe(`configure()`, () => {
     it(`throws`, () => {
       const value = { rootFontSize: `x`, baselineHeight: `100%` };
       expect(() => createBaseline(value)).toThrow(
-        `[cssjs-baseline] configure() The config object was invalid: Object Invalid: Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`
+        `[cssapi-baseline] configure() The config object was invalid: Object Invalid: Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`
       );
     });
   });

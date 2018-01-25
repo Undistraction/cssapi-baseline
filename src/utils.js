@@ -12,8 +12,9 @@ import {
   reject,
   anyPass,
   prop,
+  pickBy,
 } from 'ramda';
-import { isString, isArray } from 'ramda-adjunct';
+import { isString, isArray, isNotUndefined } from 'ramda-adjunct';
 import { isUndefined } from 'util';
 
 // -----------------------------------------------------------------------------
@@ -67,3 +68,9 @@ export const propValue = prop(`value`);
 // -----------------------------------------------------------------------------
 
 export const appendTo = flip(append);
+
+// -----------------------------------------------------------------------------
+// Object
+// -----------------------------------------------------------------------------
+
+export const withoutUndefined = pickBy(isNotUndefined);
