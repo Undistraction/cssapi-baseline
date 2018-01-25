@@ -34,6 +34,21 @@ export default {
       ],
     }),
     // Allow CommonJS modules to be included in build.
-    commonjs(),
+    commonjs({
+      namedExports: {
+        'node_modules/folktale-validations/lib/index.js': [
+          `validateIsObject`,
+          `validateObjectWithConstraints`,
+          `validateIsWhitelistedString`,
+          `validateIsValidNumber`,
+          `validateIsBoolean`,
+          `orValidator`,
+          `numberWithUnitValidator`,
+          `validateIsNotUndefined`,
+          `validateIsFunction`,
+        ],
+        'node_modules/folktale/index.js': [`validation`],
+      },
+    }),
   ],
 };

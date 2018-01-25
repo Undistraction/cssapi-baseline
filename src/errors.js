@@ -24,10 +24,7 @@ export const throwAPIError = throwPrefixedError(API_PREFIX);
 // Messages
 // -----------------------------------------------------------------------------
 
-export const invalidConfigMessage = validationErrors => {
-  console.log(`!!!!!`, validationErrors);
-  return `The config object was invalid: ${joinWithComma(validationErrors)}`;
-};
+export const invalidConfigMessage = validationErrors => `The config object was invalid: ${joinWithComma(validationErrors)}`;
 
 export const invalidAPIParamsMessage = joinWithComma;
 

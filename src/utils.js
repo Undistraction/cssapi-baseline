@@ -14,8 +14,7 @@ import {
   prop,
   pickBy,
 } from 'ramda';
-import { isString, isArray, isNotUndefined } from 'ramda-adjunct';
-import { isUndefined } from 'util';
+import { isString, isArray, isUndefined, isNotUndefined } from 'ramda-adjunct';
 
 // -----------------------------------------------------------------------------
 // Logging

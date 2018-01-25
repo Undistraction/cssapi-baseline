@@ -77,7 +77,6 @@ describe(`api`, () => {
       describe(`'lines'`, () => {
         describe(`invalid value`, () => {
           map(invalidValue => {
-            console.log(`V`, invalidValue);
             expect(() => baseline(16, invalidValue)).toThrowError(
               `[cssapi-baseline] api() You supplied invalid Arguments Argument 'lines': Wasn't a valid Number`
             );
