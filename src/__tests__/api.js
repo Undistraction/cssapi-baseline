@@ -8,9 +8,8 @@ describe(`api`, () => {
     const baseline = createBaseline();
 
     describe(`with no args`, () => {
-      expect(() => baseline()).toThrowError(
-        `api() Missing required arguments ['fontSize']`
-      );
+      expect(() => baseline()).toThrowMultiline(`
+        [cssapi-baseline] api() Arguments missing required key(s): ['fontSize']`);
     });
 
     describe(`params`, () => {
@@ -18,9 +17,9 @@ describe(`api`, () => {
         describe(`invalid value`, () => {
           it(`throws`, () => {
             map(invalidValue => {
-              expect(() => baseline(invalidValue)).toThrowError(
-                `[cssapi-baseline] api() You supplied invalid Arguments Argument 'fontSize': Wasn't a valid Number and Wasn't number with unit: 'px'`
-              );
+              expect(() => baseline(invalidValue)).toThrowMultiline(`
+                [cssapi-baseline] api() Arguments included invalid value(s)
+                  – Key 'fontSize': Wasn't Valid Number or Wasn't number with unit: 'px'`);
             })(notNumberOrUndefined);
           });
 
@@ -77,10 +76,9 @@ describe(`api`, () => {
       describe(`'lines'`, () => {
         describe(`invalid value`, () => {
           map(invalidValue => {
-            console.log(`V`, invalidValue);
-            expect(() => baseline(16, invalidValue)).toThrowError(
-              `[cssapi-baseline] api() You supplied invalid Arguments Argument 'lines': Wasn't a valid Number`
-            );
+            expect(() => baseline(16, invalidValue)).toThrowMultiline(`
+            [cssapi-baseline] api() Arguments included invalid value(s)
+              – Key 'lines': Wasn't Valid Number`);
           })(notNumberOrUndefined);
         });
 

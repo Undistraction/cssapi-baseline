@@ -14,8 +14,7 @@ import {
   prop,
   pickBy,
 } from 'ramda';
-import { isString, isArray, isNotUndefined } from 'ramda-adjunct';
-import { isUndefined } from 'util';
+import { isString, isArray, isUndefined, isNotUndefined } from 'ramda-adjunct';
 
 // -----------------------------------------------------------------------------
 // Logging
@@ -73,4 +72,4 @@ export const appendTo = flip(append);
 // Object
 // -----------------------------------------------------------------------------
 
-export const withoutUndefined = pickBy(isNotUndefined);
+export const pickIsNotUndefined = pickBy(isNotUndefined);

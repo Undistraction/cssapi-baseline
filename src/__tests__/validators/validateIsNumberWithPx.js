@@ -1,7 +1,7 @@
 import { validation as Validation } from 'folktale';
-import validateIsNumberWithPx from '../../validators/validateIsNumberWithPx';
+import validateIsNumberWithPx from '../../validations/validators/validateIsNumberWithPx';
 
-const { Success, Failure } = Validation;
+const { Success } = Validation;
 
 describe(`isNumberWithPx()`, () => {
   describe(`when argument is pixel value`, () => {
@@ -14,9 +14,12 @@ describe(`isNumberWithPx()`, () => {
   });
   describe(`when argument is invalid value`, () => {
     it(`returns a Validation.Failure with an error message`, () => {
-      const validation = validateIsNumberWithPx();
-      expect(Failure.hasInstance(validation)).toBeTruthy();
-      expect(validation.value).toEqual([`Wasn't number with unit: 'px'`]);
+      const validation = validateIsNumberWithPx(11);
+      expect(validation.value).toEqual({
+        args: [`px`],
+        uid: `folktale-validations.validateIsNumberWithUnit`,
+        value: 11,
+      });
     });
   });
 });

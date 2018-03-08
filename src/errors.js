@@ -1,6 +1,9 @@
-import { compose, replace } from 'ramda';
+import { defaultRenderers } from 'folktale-validations';
+import { compose } from 'ramda';
 import { joinWithComma, joinWithSpace, appendTo } from './utils';
 import { ERROR_PREFIX, CONFIGURE_PREFIX, API_PREFIX } from './const';
+
+const { argumentsFailureRenderer } = defaultRenderers;
 
 // -----------------------------------------------------------------------------
 // Utils
@@ -17,44 +20,20 @@ const throwPrefixedError = prefix =>
 // Prefixed Errors
 // -----------------------------------------------------------------------------
 
-export const throwConfigureError = throwPrefixedError(CONFIGURE_PREFIX);
-export const throwAPIError = throwPrefixedError(API_PREFIX);
+export const throwConfigureError = compose(
+  throwPrefixedError(CONFIGURE_PREFIX),
+  argumentsFailureRenderer
+);
+export const throwAPIError = compose(
+  throwPrefixedError(API_PREFIX),
+  argumentsFailureRenderer
+);
 
 // -----------------------------------------------------------------------------
 // Messages
 // -----------------------------------------------------------------------------
 
-export const invalidConfigMessage = validationErrors => {
-  console.log(`!!!!!`, validationErrors);
-  return `The config object was invalid: ${joinWithComma(validationErrors)}`;
-};
+export const invalidConfigMessage = validationErrors =>
+  `The config object was invalid: ${joinWithComma(validationErrors)}`;
 
 export const invalidAPIParamsMessage = joinWithComma;
-
-// -----------------------------------------------------------------------------
-// Validation Replacement
-// -----------------------------------------------------------------------------
-
-const replaceMissingRequiredValuesPrefix = replace(
-  `Object Invalid: Object was missing required key(s):`,
-  `Missing required arguments`
-);
-
-const replaceInvalidKeysPrefix = replace(
-  `Object Invalid: Object included invalid key(s):`,
-  `You supplied unsupported Arguments`
-);
-
-const replaceInvalidValuesPrefix = replace(
-  `Object Invalid: Object included invalid values(s): `,
-  `You supplied invalid Arguments `
-);
-
-const replaceValidationMessageKey = replace(/Key /g, `Argument `);
-
-export const replaceValidationMessageForApi = compose(
-  replaceMissingRequiredValuesPrefix,
-  replaceInvalidKeysPrefix,
-  replaceInvalidValuesPrefix,
-  replaceValidationMessageKey
-);

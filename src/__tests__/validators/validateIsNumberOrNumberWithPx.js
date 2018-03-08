@@ -1,5 +1,5 @@
 import { validation as Validation } from 'folktale';
-import validateIsNumberOrNumberWithPx from '../../validators/validateIsNumberOrNumberWithPx';
+import validateIsNumberOrNumberWithPx from '../../validations/validators/validateIsNumberOrNumberWithPx';
 
 const { Success, Failure } = Validation;
 
@@ -27,9 +27,20 @@ describe(`isNumberOrNumberWithPx`, () => {
       const value = `x`;
       const validation = validateIsNumberOrNumberWithPx(value);
       expect(Failure.hasInstance(validation)).toBeTruthy();
-      expect(validation.value).toEqual([
-        `Wasn't a valid Number and Wasn't number with unit: 'px'`,
-      ]);
+      expect(validation.value).toEqual({
+        or: [
+          {
+            args: [],
+            uid: `folktale-validations.validateIsValidNumber`,
+            value: `x`,
+          },
+          {
+            args: [`px`],
+            uid: `folktale-validations.validateIsNumberWithUnit`,
+            value: `x`,
+          },
+        ],
+      });
     });
   });
 });
