@@ -6,11 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/Undistraction/cssapi-baseline.git"
   },
-  "files": [
-    "dist",
-    "src",
-    "lib"
-  ],
+  "files": ["dist", "src", "lib"],
   "keywords": [],
   "author": "Pedr Browne",
   "license": "MIT",
@@ -77,8 +73,15 @@
     "cssapi-units": "^0.3.0",
     "folktale": "^2.0.1",
     "folktale-validations": "^2.2.1",
+    "husky": "^0.14.3",
     "ramda": "^0.25.0",
     "ramda-adjunct": "^2.5.0",
     "ramda-log": "^0.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run verify"
+    }
   }
 }
