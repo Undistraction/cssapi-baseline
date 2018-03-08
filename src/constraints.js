@@ -1,11 +1,12 @@
 import {
   validateIsBoolean,
-  validateIsWhitelistedString,
+  validateIsWhitelistedValue,
   validateIsFunction,
   validateIsValidNumber,
+  validateIsPlainObject,
 } from 'folktale-validations';
 import { values } from 'ramda';
-import validateIsNumberOrNumberWithPx from './validators/validateIsNumberOrNumberWithPx';
+import validateIsNumberOrNumberWithPx from './validations/validators/validateIsNumberOrNumberWithPx';
 import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
 import offsetWithPosition from './baselineOffsetStrategies/offsetWithPosition';
 import { UNITS } from './const';
@@ -28,7 +29,7 @@ export const CONFIG = {
     {
       name: `renderUnit`,
       defaultValue: UNITS.REM,
-      validator: validateIsWhitelistedString(values(UNITS)),
+      validator: validateIsWhitelistedValue(values(UNITS)),
     },
     {
       name: `allowHalfLines`,
@@ -51,6 +52,17 @@ export const CONFIG = {
       name: `baselineOffsetStrategy`,
       defaultValue: offsetWithPosition,
       validator: validateIsFunction,
+    },
+  ],
+};
+
+export const BASELINE_ARGS = {
+  fields: [
+    {
+      name: `config`,
+      validator: validateIsPlainObject,
+      defaultValue: {},
+      value: CONFIG,
     },
   ],
 };

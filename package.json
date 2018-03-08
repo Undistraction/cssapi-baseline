@@ -59,6 +59,7 @@
     "glamor": "^2.20.40",
     "glamorous": "^4.11.2",
     "glamour": "^1.2.3",
+    "jasmine-multiline-matchers": "^0.2.0",
     "jest": "^21.2.1",
     "jest-glamor-react": "^3.2.2",
     "jest-styled-components": "^4.9.0",
@@ -76,8 +77,9 @@
   "dependencies": {
     "cssapi-units": "^0.3.0",
     "folktale": "^2.0.1",
-    "folktale-validations": "^0.0.45",
+    "folktale-validations": "^2.2.1",
     "ramda": "^0.25.0",
-    "ramda-adjunct": "^2.1.0"
+    "ramda-adjunct": "^2.5.0",
+    "ramda-log": "^0.0.3"
   }
 }

@@ -15,9 +15,9 @@ describe(`configure()`, () => {
   describe(`with an invalid argument`, () => {
     it(`throws`, () => {
       const value = `x`;
-      expect(() => createBaseline(value)).toThrow(
-        `[cssapi-baseline] configure() The config object was invalid: Wasn't type: 'Object'`
-      );
+      expect(() => createBaseline(value)).toThrowMultiline(`
+        [cssapi-baseline] configure() Arguments included invalid value(s)
+          – Key 'config': Wasn't Plain Object`);
     });
   });
 
@@ -25,18 +25,20 @@ describe(`configure()`, () => {
     it(`throws`, () => {
       const value = { a: 1, b: 2 };
 
-      expect(() => createBaseline(value)).toThrow(
-        `[cssapi-baseline] configure() The config object was invalid: Object Invalid: Object included invalid key(s): '[a, b]'`
-      );
+      expect(() => createBaseline(value)).toThrowMultiline(`
+      [cssapi-baseline] configure() Arguments included invalid value(s)
+        – Key 'config': Object included key(s) not on whitelist: ['rootFontSize', 'baselineHeight', 'renderUnit', 'allowHalfLines', 'minLeading', 'baselineOffset', 'baselineOffsetStrategy']`);
     });
   });
 
   describe(`with invalid config param keys`, () => {
     it(`throws`, () => {
       const value = { rootFontSize: `x`, baselineHeight: `100%` };
-      expect(() => createBaseline(value)).toThrow(
-        `[cssapi-baseline] configure() The config object was invalid: Object Invalid: Object included invalid values(s): Key 'rootFontSize': Wasn't a valid Number and Wasn't number with unit: 'px', Key 'baselineHeight': Wasn't a valid Number and Wasn't number with unit: 'px'`
-      );
+      expect(() => createBaseline(value)).toThrowMultiline(`
+        [cssapi-baseline] configure() Arguments included invalid value(s)
+          – Key 'config': Object included invalid value(s)
+            – Key 'rootFontSize': Wasn't Valid Number or Wasn't number with unit: 'px'
+            – Key 'baselineHeight': Wasn't Valid Number or Wasn't number with unit: 'px'`);
     });
   });
 });

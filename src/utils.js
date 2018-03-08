@@ -72,4 +72,4 @@ export const appendTo = flip(append);
 // Object
 // -----------------------------------------------------------------------------
 
-export const withoutUndefined = pickBy(isNotUndefined);
+export const pickIsNotUndefined = pickBy(isNotUndefined);
