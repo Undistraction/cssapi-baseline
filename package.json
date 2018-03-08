@@ -6,11 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/Undistraction/cssapi-baseline.git"
   },
-  "files": [
-    "dist",
-    "src",
-    "lib"
-  ],
+  "files": ["src", "lib"],
   "keywords": [],
   "author": "Pedr Browne",
   "license": "MIT",
@@ -23,7 +19,6 @@
     "prebuild:lib": "rimraf lib/*",
     "prebuild": "npm run lint",
     "build:lib": "babel --out-dir lib --ignore \"__tests__\" src",
-    "build:dist": "NODE_ENV=development rollup --config",
     "test": "jest --watch",
     "test:noWatch": "jest",
     "test:cov": "open coverage/index.html",
