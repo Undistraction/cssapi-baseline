@@ -4,12 +4,12 @@ import {
   validateIsFunction,
   validateIsValidNumber,
   validateIsPlainObject,
-} from 'folktale-validations';
-import { values } from 'ramda';
-import validateIsNumberOrNumberWithPx from './validations/validators/validateIsNumberOrNumberWithPx';
-import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber';
-import offsetWithPosition from './baselineOffsetStrategies/offsetWithPosition';
-import { UNITS } from './const';
+} from 'folktale-validations'
+import { values } from 'ramda'
+import validateIsNumberOrNumberWithPx from './validations/validators/validateIsNumberOrNumberWithPx'
+import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber'
+import offsetWithPosition from './baselineOffsetStrategies/offsetWithPosition'
+import { UNITS } from './const'
 
 // eslint-disable-next-line import/prefer-default-export
 export const CONFIG = {
@@ -54,7 +54,7 @@ export const CONFIG = {
       validator: validateIsFunction,
     },
   ],
-};
+}
 
 export const BASELINE_ARGS = {
   fields: [
@@ -65,7 +65,7 @@ export const BASELINE_ARGS = {
       value: CONFIG,
     },
   ],
-};
+}
 
 export const API = {
   fields: [
@@ -80,4 +80,4 @@ export const API = {
       validator: validateIsValidNumber,
     },
   ],
-};
+}
