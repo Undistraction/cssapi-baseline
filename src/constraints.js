@@ -11,7 +11,6 @@ import numberOrPxNumberToNumber from './transformers/numberOrPxNumberToNumber'
 import offsetWithPosition from './baselineOffsetStrategies/offsetWithPosition'
 import { UNITS } from './const'
 
-// eslint-disable-next-line import/prefer-default-export
 export const CONFIG = {
   fields: [
     {
