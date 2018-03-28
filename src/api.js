@@ -17,7 +17,7 @@ export default config => {
     baselineOffsetStrategy,
   } = config
 
-  return (fontSize, lines) => {
+  const text = (fontSize, lines) => {
     validateAPIArgs(pickIsNotUndefined({ fontSize, lines })).orElse(
       throwAPIError
     )
@@ -51,5 +51,9 @@ export default config => {
           baselineOffsetStrategy(fontSize, baselineOffset, outputWithChosenUnit)
         )
       : styles
+  }
+
+  return {
+    text,
   }
 }

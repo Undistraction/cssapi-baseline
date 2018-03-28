@@ -1,4 +1,4 @@
-import { isFunction } from 'ramda-adjunct'
+import { isObject } from 'ramda-adjunct'
 import createBaseline from '../index'
 
 describe(`configure()`, () => {
@@ -7,8 +7,8 @@ describe(`configure()`, () => {
       expect(() => createBaseline()).not.toThrow()
     })
 
-    it(`returns a function`, () => {
-      expect(isFunction(createBaseline())).toBeTruthy()
+    it(`returns an object`, () => {
+      expect(isObject(createBaseline())).toBeTruthy()
     })
   })
 
