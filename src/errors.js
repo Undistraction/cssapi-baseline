@@ -1,6 +1,7 @@
 import { defaultRenderers } from 'folktale-validations'
 import { compose } from 'ramda'
-import { joinWithComma, joinWithSpace, appendTo } from './utils'
+import { appendFlipped } from 'ramda-adjunct'
+import { joinWithComma, joinWithSpace } from './utils'
 import { ERROR_PREFIX, CONFIGURE_PREFIX, API_PREFIX } from './const'
 
 const { argumentsFailureRenderer } = defaultRenderers
@@ -14,7 +15,7 @@ const throwError = message => {
 }
 
 const throwPrefixedError = prefix =>
-  compose(throwError, joinWithSpace, appendTo([prefix]))
+  compose(throwError, joinWithSpace, appendFlipped([prefix]))
 
 // -----------------------------------------------------------------------------
 // Prefixed Errors
